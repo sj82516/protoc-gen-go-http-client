@@ -9,5 +9,8 @@ rebuild and install bin
 test if works.
 > $ protoc --go-http-client_out=. --go-http-client_opt="paths=source_relative" --go_out=. --go_opt=paths=source_relative example/proto/*.proto
 
+add opts from command.
+- base_url: the base url of http request
+> $ protoc --go-http-client_out=. --go-http-client_opt=paths=source_relative,base_url=api.com example/*.proto
 ## Ref
 1. https://rotemtam.com/2021/03/22/creating-a-protoc-plugin-to-gen-go-code/
