@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "protoc-gen-go-http-client/example";
 
 message Hello {
-  option (message_options).ignore = true;
   string text = 1;
 }
 
