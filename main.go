@@ -22,4 +22,16 @@ func generateFile(gen *protogen.Plugin, file *protogen.File) {
     g.P()
     g.P("package ", file.GoPackageName)
     g.P()
+    g.P("func main() {")
+    
+    for _, srv := range file.Services {
+        for _, method := range srv.Methods {
+            if method.GoName == "Get" {
+                g.P("// it's get")
+            }
+        }
+    }
+    
+    g.P()
+    g.P("}")
 }
