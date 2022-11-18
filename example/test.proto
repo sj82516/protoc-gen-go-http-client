@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option go_package = "protoc-gen-go-http-client/example";
+
+message Hello {
+  string text = 1;
+}
+
+service HelloService {
+  rpc Create(Hello) returns (Hello);
+}
