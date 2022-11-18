@@ -6,6 +6,10 @@ message Hello {
   string text = 1;
 }
 
+message User {
+  int64 id = 1;
+}
+
 service HelloService {
-  rpc Create(Hello) returns (Hello);
+  rpc Get(User) returns (Hello);
 }
