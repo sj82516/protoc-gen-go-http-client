@@ -1,15 +1,21 @@
 syntax = "proto3";
 
+package example;
+
 option go_package = "protoc-gen-go-http-client/example";
+
+import "options.proto";
 
 message Hello {
   string text = 1;
 }
 
 message User {
-  int64 id = 1;
+  int64 id = 1[(field_opts).default="1"];
 }
 
 service HelloService {
-  rpc Get(User) returns (Hello);
+  rpc Get(User) returns (Hello) {
+      option (method_opts).method="get";
+  };
 }

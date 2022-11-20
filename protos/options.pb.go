@@ -4,7 +4,7 @@
 // 	protoc        v3.15.6
 // source: options.proto
 
-package protos
+package __
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -21,16 +21,62 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageOptions struct {
+type MethodEnum int32
+
+const (
+	MethodEnum_GET  MethodEnum = 0
+	MethodEnum_POST MethodEnum = 1
+)
+
+// Enum value maps for MethodEnum.
+var (
+	MethodEnum_name = map[int32]string{
+		0: "GET",
+		1: "POST",
+	}
+	MethodEnum_value = map[string]int32{
+		"GET":  0,
+		"POST": 1,
+	}
+)
+
+func (x MethodEnum) Enum() *MethodEnum {
+	p := new(MethodEnum)
+	*p = x
+	return p
+}
+
+func (x MethodEnum) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MethodEnum) Descriptor() protoreflect.EnumDescriptor {
+	return file_options_proto_enumTypes[0].Descriptor()
+}
+
+func (MethodEnum) Type() protoreflect.EnumType {
+	return &file_options_proto_enumTypes[0]
+}
+
+func (x MethodEnum) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MethodEnum.Descriptor instead.
+func (MethodEnum) EnumDescriptor() ([]byte, []int) {
+	return file_options_proto_rawDescGZIP(), []int{0}
+}
+
+type HttpClientFileOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ignore bool `protobuf:"varint,1,opt,name=ignore,proto3" json:"ignore,omitempty"`
+	ForFile bool `protobuf:"varint,1,opt,name=for_file,json=forFile,proto3" json:"for_file,omitempty"`
 }
 
-func (x *MessageOptions) Reset() {
-	*x = MessageOptions{}
+func (x *HttpClientFileOptions) Reset() {
+	*x = HttpClientFileOptions{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_options_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -38,13 +84,13 @@ func (x *MessageOptions) Reset() {
 	}
 }
 
-func (x *MessageOptions) String() string {
+func (x *HttpClientFileOptions) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageOptions) ProtoMessage() {}
+func (*HttpClientFileOptions) ProtoMessage() {}
 
-func (x *MessageOptions) ProtoReflect() protoreflect.Message {
+func (x *HttpClientFileOptions) ProtoReflect() protoreflect.Message {
 	mi := &file_options_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,33 +102,163 @@ func (x *MessageOptions) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use MessageOptions.ProtoReflect.Descriptor instead.
-func (*MessageOptions) Descriptor() ([]byte, []int) {
+// Deprecated: Use HttpClientFileOptions.ProtoReflect.Descriptor instead.
+func (*HttpClientFileOptions) Descriptor() ([]byte, []int) {
 	return file_options_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *MessageOptions) GetIgnore() bool {
+func (x *HttpClientFileOptions) GetForFile() bool {
 	if x != nil {
-		return x.Ignore
+		return x.ForFile
+	}
+	return false
+}
+
+type HttpClientFieldOptions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Default string `protobuf:"bytes,1,opt,name=default,proto3" json:"default,omitempty"`
+}
+
+func (x *HttpClientFieldOptions) Reset() {
+	*x = HttpClientFieldOptions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_options_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HttpClientFieldOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HttpClientFieldOptions) ProtoMessage() {}
+
+func (x *HttpClientFieldOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_options_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HttpClientFieldOptions.ProtoReflect.Descriptor instead.
+func (*HttpClientFieldOptions) Descriptor() ([]byte, []int) {
+	return file_options_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *HttpClientFieldOptions) GetDefault() string {
+	if x != nil {
+		return x.Default
+	}
+	return ""
+}
+
+type HttpClientMethodOptions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Method       MethodEnum `protobuf:"varint,1,opt,name=method,proto3,enum=MethodEnum" json:"method,omitempty"`
+	IsReturnJson bool       `protobuf:"varint,2,opt,name=is_return_json,json=isReturnJson,proto3" json:"is_return_json,omitempty"`
+}
+
+func (x *HttpClientMethodOptions) Reset() {
+	*x = HttpClientMethodOptions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_options_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HttpClientMethodOptions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HttpClientMethodOptions) ProtoMessage() {}
+
+func (x *HttpClientMethodOptions) ProtoReflect() protoreflect.Message {
+	mi := &file_options_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HttpClientMethodOptions.ProtoReflect.Descriptor instead.
+func (*HttpClientMethodOptions) Descriptor() ([]byte, []int) {
+	return file_options_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *HttpClientMethodOptions) GetMethod() MethodEnum {
+	if x != nil {
+		return x.Method
+	}
+	return MethodEnum_GET
+}
+
+func (x *HttpClientMethodOptions) GetIsReturnJson() bool {
+	if x != nil {
+		return x.IsReturnJson
 	}
 	return false
 }
 
 var file_options_proto_extTypes = []protoimpl.ExtensionInfo{
 	{
-		ExtendedType:  (*descriptorpb.MessageOptions)(nil),
-		ExtensionType: (*MessageOptions)(nil),
-		Field:         1127,
-		Name:          "message_options",
-		Tag:           "bytes,1127,opt,name=message_options",
+		ExtendedType:  (*descriptorpb.FileOptions)(nil),
+		ExtensionType: (*HttpClientFileOptions)(nil),
+		Field:         2048,
+		Name:          "file_opts",
+		Tag:           "bytes,2048,opt,name=file_opts",
+		Filename:      "options.proto",
+	},
+	{
+		ExtendedType:  (*descriptorpb.FieldOptions)(nil),
+		ExtensionType: (*HttpClientFieldOptions)(nil),
+		Field:         2049,
+		Name:          "field_opts",
+		Tag:           "bytes,2049,opt,name=field_opts",
+		Filename:      "options.proto",
+	},
+	{
+		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
+		ExtensionType: (*HttpClientMethodOptions)(nil),
+		Field:         2050,
+		Name:          "method_opts",
+		Tag:           "bytes,2050,opt,name=method_opts",
 		Filename:      "options.proto",
 	},
 }
 
-// Extension fields to descriptorpb.MessageOptions.
+// Extension fields to descriptorpb.FileOptions.
 var (
-	// optional MessageOptions message_options = 1127;
-	E_MessageOptions = &file_options_proto_extTypes[0]
+	// optional HttpClientFileOptions file_opts = 2048;
+	E_FileOpts = &file_options_proto_extTypes[0]
+)
+
+// Extension fields to descriptorpb.FieldOptions.
+var (
+	// optional HttpClientFieldOptions field_opts = 2049;
+	E_FieldOpts = &file_options_proto_extTypes[1]
+)
+
+// Extension fields to descriptorpb.MethodOptions.
+var (
+	// optional HttpClientMethodOptions method_opts = 2050;
+	E_MethodOpts = &file_options_proto_extTypes[2]
 )
 
 var File_options_proto protoreflect.FileDescriptor
@@ -91,16 +267,39 @@ var file_options_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a,
 	0x20, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
 	0x2f, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x6f, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x22, 0x28, 0x0a, 0x0e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x4f, 0x70, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x69, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x06, 0x69, 0x67, 0x6e, 0x6f, 0x72, 0x65, 0x3a, 0x5a, 0x0a, 0x0f, 0x6d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x5f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1f,
-	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
-	0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18,
-	0xe7, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0e, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x2f, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6f, 0x22, 0x32, 0x0a, 0x15, 0x48, 0x74, 0x74, 0x70, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x46,
+	0x69, 0x6c, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x19, 0x0a, 0x08, 0x66, 0x6f,
+	0x72, 0x5f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x66, 0x6f,
+	0x72, 0x46, 0x69, 0x6c, 0x65, 0x22, 0x32, 0x0a, 0x16, 0x48, 0x74, 0x74, 0x70, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12,
+	0x18, 0x0a, 0x07, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74, 0x22, 0x64, 0x0a, 0x17, 0x48, 0x74, 0x74,
+	0x70, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x4f, 0x70, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x12, 0x23, 0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0e, 0x32, 0x0b, 0x2e, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x45, 0x6e, 0x75,
+	0x6d, 0x52, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x24, 0x0a, 0x0e, 0x69, 0x73, 0x5f,
+	0x72, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x5f, 0x6a, 0x73, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0c, 0x69, 0x73, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x4a, 0x73, 0x6f, 0x6e, 0x2a,
+	0x1f, 0x0a, 0x0a, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x45, 0x6e, 0x75, 0x6d, 0x12, 0x07, 0x0a,
+	0x03, 0x47, 0x45, 0x54, 0x10, 0x00, 0x12, 0x08, 0x0a, 0x04, 0x50, 0x4f, 0x53, 0x54, 0x10, 0x01,
+	0x3a, 0x52, 0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6f, 0x70, 0x74, 0x73, 0x12, 0x1c, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x46, 0x69, 0x6c, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x80, 0x10, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x16, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x46,
+	0x69, 0x6c, 0x65, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65,
+	0x4f, 0x70, 0x74, 0x73, 0x3a, 0x56, 0x0a, 0x0a, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x5f, 0x6f, 0x70,
+	0x74, 0x73, 0x12, 0x1d, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x18, 0x81, 0x10, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x52, 0x09, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x4f, 0x70, 0x74, 0x73, 0x3a, 0x5a, 0x0a, 0x0b,
+	0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x5f, 0x6f, 0x70, 0x74, 0x73, 0x12, 0x1e, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x4d, 0x65,
+	0x74, 0x68, 0x6f, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x82, 0x10, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x18, 0x2e, 0x48, 0x74, 0x74, 0x70, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d,
+	0x65, 0x74, 0x68, 0x6f, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0a, 0x6d, 0x65,
+	0x74, 0x68, 0x6f, 0x64, 0x4f, 0x70, 0x74, 0x73, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -115,19 +314,30 @@ func file_options_proto_rawDescGZIP() []byte {
 	return file_options_proto_rawDescData
 }
 
-var file_options_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_options_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_options_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_options_proto_goTypes = []interface{}{
-	(*MessageOptions)(nil),              // 0: MessageOptions
-	(*descriptorpb.MessageOptions)(nil), // 1: google.protobuf.MessageOptions
+	(MethodEnum)(0),                    // 0: MethodEnum
+	(*HttpClientFileOptions)(nil),      // 1: HttpClientFileOptions
+	(*HttpClientFieldOptions)(nil),     // 2: HttpClientFieldOptions
+	(*HttpClientMethodOptions)(nil),    // 3: HttpClientMethodOptions
+	(*descriptorpb.FileOptions)(nil),   // 4: google.protobuf.FileOptions
+	(*descriptorpb.FieldOptions)(nil),  // 5: google.protobuf.FieldOptions
+	(*descriptorpb.MethodOptions)(nil), // 6: google.protobuf.MethodOptions
 }
 var file_options_proto_depIdxs = []int32{
-	1, // 0: message_options:extendee -> google.protobuf.MessageOptions
-	0, // 1: message_options:type_name -> MessageOptions
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	1, // [1:2] is the sub-list for extension type_name
-	0, // [0:1] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: HttpClientMethodOptions.method:type_name -> MethodEnum
+	4, // 1: file_opts:extendee -> google.protobuf.FileOptions
+	5, // 2: field_opts:extendee -> google.protobuf.FieldOptions
+	6, // 3: method_opts:extendee -> google.protobuf.MethodOptions
+	1, // 4: file_opts:type_name -> HttpClientFileOptions
+	2, // 5: field_opts:type_name -> HttpClientFieldOptions
+	3, // 6: method_opts:type_name -> HttpClientMethodOptions
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	4, // [4:7] is the sub-list for extension type_name
+	1, // [1:4] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_options_proto_init() }
@@ -137,7 +347,31 @@ func file_options_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_options_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageOptions); i {
+			switch v := v.(*HttpClientFileOptions); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_options_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HttpClientFieldOptions); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_options_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HttpClientMethodOptions); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -154,13 +388,14 @@ func file_options_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_options_proto_rawDesc,
-			NumEnums:      0,
-			NumMessages:   1,
-			NumExtensions: 1,
+			NumEnums:      1,
+			NumMessages:   3,
+			NumExtensions: 3,
 			NumServices:   0,
 		},
 		GoTypes:           file_options_proto_goTypes,
 		DependencyIndexes: file_options_proto_depIdxs,
+		EnumInfos:         file_options_proto_enumTypes,
 		MessageInfos:      file_options_proto_msgTypes,
 		ExtensionInfos:    file_options_proto_extTypes,
 	}.Build()

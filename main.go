@@ -2,8 +2,12 @@ package main
 
 import (
     "flag"
+    "fmt"
     
+    customProto "github.com/sj82516/protoc-gen-go-http-client/protos"
     "google.golang.org/protobuf/compiler/protogen"
+    "google.golang.org/protobuf/proto"
+    "google.golang.org/protobuf/types/descriptorpb"
 )
 
 func main() {
@@ -36,9 +40,16 @@ func generateFile(gen *protogen.Plugin, file *protogen.File, test *string) {
     
     for _, srv := range file.Services {
         for _, method := range srv.Methods {
-            if method.GoName == "Get" {
-                g.P("// it's get")
+            options := method.Desc.Options().(*descriptorpb.MethodOptions)
+            if options == nil {
             }
+            
+            v := proto.GetExtension(options, customProto.E_MethodOpts)
+            if v == nil {
+            }
+            
+            opts, _ := v.(*customProto.HttpClientMethodOptions)
+            fmt.Println(opts.Method)
         }
     }
     
