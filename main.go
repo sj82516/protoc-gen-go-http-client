@@ -2,8 +2,12 @@ package main
 
 import (
     "flag"
+    "fmt"
     
+    customProto "github.com/sj82516/protoc-gen-go-http-client/protos"
     "google.golang.org/protobuf/compiler/protogen"
+    "google.golang.org/protobuf/proto"
+    "google.golang.org/protobuf/types/descriptorpb"
 )
 
 func main() {
@@ -32,16 +36,37 @@ func generateFile(gen *protogen.Plugin, file *protogen.File, baseURL *string) {
     g.P()
     g.P("package ", file.GoPackageName)
     g.P()
+    
+    // use g.Import import package
+    //g.P("import \"net/http\"")
+    //g.P("import \"log\"")
+    g.QualifiedGoIdent(protogen.GoIdent{GoName: "http", GoImportPath: "net/http"})
+    g.QualifiedGoIdent(protogen.GoIdent{GoName: "log", GoImportPath: "log"})
+    
     g.P("func main() {")
     
     for _, srv := range file.Services {
         for _, method := range srv.Methods {
-            if method.GoName == "Get" {
-                g.P("// it's get")
+            options := method.Desc.Options().(*descriptorpb.MethodOptions)
+            if options == nil {
+            }
+            
+            v := proto.GetExtension(options, customProto.E_MethodOpts)
+            if v == nil {
+            }
+            
+            opts, _ := v.(*customProto.HttpClientMethodOptions)
+            if opts.Method == "get" {
+                g.P(fmt.Sprintf("res, err := http.Get(\"%s\")\n", *baseURL))
+                g.P("if err != nil {")
+                g.P("log.Fatal(err)")
+                g.P("}")
+                g.P("defer res.Body.Close()")
             }
         }
     }
     
     g.P()
     g.P("}")
+    g.Content()
 }

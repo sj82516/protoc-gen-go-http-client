@@ -3,7 +3,17 @@
 
 package example
 
+import (
+	log "log"
+	http "net/http"
+)
+
 func main() {
-	// it's get
+	res, err := http.Get("api.com")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer res.Body.Close()
 
 }

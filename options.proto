@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package=".";
+
+import "google/protobuf/descriptor.proto";
+
+message HttpClientFileOptions {
+  bool for_file = 1;
+};
+
+extend google.protobuf.FileOptions {
+  HttpClientFileOptions file_opts = 2048;
+}
+
+message HttpClientFieldOptions {
+  string default = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  HttpClientFieldOptions field_opts = 2049;
+}
+
+message HttpClientMethodOptions {
+  string method = 1;
+  bool is_return_json = 2;
+}
+
+extend google.protobuf.MethodOptions {
+  HttpClientMethodOptions method_opts = 2050;
+}
