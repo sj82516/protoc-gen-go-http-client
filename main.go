@@ -55,6 +55,7 @@ func generateFile(gen *protogen.Plugin, file *protogen.File, baseURL *string) {
             if v == nil {
             }
             
+            // wrap as client
             opts, _ := v.(*customProto.HttpClientMethodOptions)
             if opts.Method == "get" {
                 g.P(fmt.Sprintf("res, err := http.Get(\"%s\")\n", *baseURL))

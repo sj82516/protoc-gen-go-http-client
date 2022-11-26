@@ -1,6 +1,29 @@
 # protoc-go-gen-http-client
 only for practice. Gen http client api call from protobuf.
 
+## what can it do
+refer to example/test.proto.   
+Gen http client call in golang by proto tags.
+
+```protobuf
+
+```
+
+```go
+package main
+
+func GetClient() {
+    res, err := http.Get("api.com")
+    
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer res.Body.Close()
+
+
+}
+```
+
 ## How to dev
 ### 1. install at local
 rebuild and install bin

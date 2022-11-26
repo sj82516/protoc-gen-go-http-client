@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-option go_package=".";
+option go_package="github.com/sj82516/protoc-gen-go-http-client/protos";
+//this would cause wrong import path
+//option go_package=".";
 
 import "google/protobuf/descriptor.proto";
 

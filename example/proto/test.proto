@@ -4,10 +4,11 @@ package example;
 
 option go_package = "protoc-gen-go-http-client/example";
 
-import "options.proto";
+import "example/http-client/options.proto";
 
 message Hello {
   string text = 1;
+  string content = 2;
 }
 
 message User {
@@ -17,5 +18,6 @@ message User {
 service HelloService {
   rpc Get(User) returns (Hello) {
       option (method_opts).method="get";
+      // path
   };
 }
