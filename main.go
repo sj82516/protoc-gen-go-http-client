@@ -42,11 +42,11 @@ func generateFile(gen *protogen.Plugin, file *protogen.File, baseURL *string) {
     //g.P("import \"log\"")
     g.QualifiedGoIdent(protogen.GoIdent{GoName: "http", GoImportPath: "net/http"})
     g.QualifiedGoIdent(protogen.GoIdent{GoName: "log", GoImportPath: "log"})
-    
-    g.P("func main() {")
+    g.QualifiedGoIdent(protogen.GoIdent{GoName: "json", GoImportPath: "encoding/json"})
     
     for _, srv := range file.Services {
         for _, method := range srv.Methods {
+            // parse option
             options := method.Desc.Options().(*descriptorpb.MethodOptions)
             if options == nil {
             }
@@ -58,16 +58,19 @@ func generateFile(gen *protogen.Plugin, file *protogen.File, baseURL *string) {
             // wrap as client
             opts, _ := v.(*customProto.HttpClientMethodOptions)
             if opts.Method == "get" {
-                g.P(fmt.Sprintf("res, err := http.Get(\"%s\")\n", *baseURL))
+                g.P(fmt.Sprintf("func %s() {", method.GoName))
+                g.P(fmt.Sprintf("res, err := http.Get(\"https://%s%s\")\n", *baseURL, opts.Path))
+                g.P(fmt.Sprintf("target := %s{}", method.Output.Desc.Name()))
                 g.P("if err != nil {")
                 g.P("log.Fatal(err)")
                 g.P("}")
                 g.P("defer res.Body.Close()")
+                g.P("json.NewDecoder(res.Body).Decode(target)")
+                g.P("}")
             }
         }
     }
     
     g.P()
-    g.P("}")
     g.Content()
 }

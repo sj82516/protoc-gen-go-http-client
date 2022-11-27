@@ -1,8 +1,6 @@
 syntax = "proto3";
 
 option go_package="github.com/sj82516/protoc-gen-go-http-client/protos";
-//this would cause wrong import path
-//option go_package=".";
 
 import "google/protobuf/descriptor.proto";
 
@@ -24,7 +22,7 @@ extend google.protobuf.FieldOptions {
 
 message HttpClientMethodOptions {
   string method = 1;
-  bool is_return_json = 2;
+  string path = 2;
 }
 
 extend google.protobuf.MethodOptions {

@@ -4,16 +4,18 @@
 package example
 
 import (
+	json "encoding/json"
 	log "log"
 	http "net/http"
 )
 
-func main() {
-	res, err := http.Get("api.com")
+func GetUser() {
+	res, err := http.Get("https://api.com/user")
 
+	target := User{}
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer res.Body.Close()
-
+	json.NewDecoder(res.Body).Decode(target)
 }

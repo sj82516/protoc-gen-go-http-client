@@ -16,8 +16,8 @@ message User {
 }
 
 service HelloService {
-  rpc Get(User) returns (Hello) {
+  rpc GetUser(Hello) returns (User) {
       option (method_opts).method="get";
-      // path
+      option (method_opts).path="/user";
   };
 }

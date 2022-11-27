@@ -29,11 +29,14 @@ func GetClient() {
 rebuild and install bin
 > $ go install
 
-test if works.
+update proto extend
+> $ protoc --go_out=paths=source_relative:. --proto_path=.  protos/*.proto
+
+#### test if works.
 > $ protoc --go-http-client_out=. --go-http-client_opt="paths=source_relative" --go_out=. --go_opt=paths=source_relative example/proto/*.proto
 
 add opts from command.
 - base_url: the base url of http request
-> $ protoc --go-http-client_out=. --go-http-client_opt=paths=source_relative,base_url=api.com example/*.proto
+> $ protoc --go-http-client_out=. --go-http-client_opt=paths=source_relative,base_url=api.com --go_out="." --go_opt=paths=source_relative --proto_path=.  example/proto/*.proto
 ## Ref
 1. https://rotemtam.com/2021/03/22/creating-a-protoc-plugin-to-gen-go-code/
